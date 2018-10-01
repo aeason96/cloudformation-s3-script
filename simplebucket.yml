@@ -1,0 +1,11 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: A Simple S3 Bucket
+Resources:
+  MyS3Bucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: 
+        Fn::Join: ["-", [!Ref "AWS::AccountId" ,Ref: NameParam]]
+Parameters:
+  NameParam: 
+    Type: String
