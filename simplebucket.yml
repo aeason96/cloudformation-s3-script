@@ -1,11 +1,15 @@
 AWSTemplateFormatVersion: "2010-09-09"
 Description: A Simple S3 Bucket
 Resources:
-  MyS3Bucket:
+  MyHW1Bucket:
     Type: "AWS::S3::Bucket"
     Properties:
       BucketName: 
-        Fn::Join: ["-", [!Ref "AWS::AccountId" ,Ref: NameParam]]
+        Fn::Join: ["-", [!If [RegionIsUSEast1, !Ref "AWS::AccountId", !Ref "AWS::Region"], Ref: NameParam]]
+
 Parameters:
   NameParam: 
     Type: String
+
+Conditions:
+  RegionIsUSEast1: !Equals [!Ref "AWS::Region", "us-east-1"]
